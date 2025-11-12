@@ -8,7 +8,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 class MessageSerializer(serializers.ModelSerializer):
     sender = UserSerializer(read_only = True)
-
+   
+    
+    # Why nested here?
+    # When fetching messages for a conversation, we want to see who sent 
+    # each message without doing extra queries.
     class Meta:
         model = Message
         fields = ['message_id','conversation','sender','message_body','sent_at']
